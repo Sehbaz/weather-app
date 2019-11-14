@@ -1,47 +1,22 @@
 import React, { Component } from "react";
 import "./App.css";
-import Content from "./Components/Content";
 import Form from "./Components/Form";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      myName: "",
-      content: [],
-      url: ""
-    };
-  }
-
-  componentDidMount() {
-    fetch(this.url)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ content: data.main.temp });
-        console.log("sehbaz");
-        // test
-        console.log(data.main.temp);
-      })
-      .catch(console.log);
-  }
-
-  handleParentData = formModel => {
-    this.setState({ ...formModel });
+  // this function will fetch the data from From.js and display it in app.js
+  state = {
+    temp: ""
   };
-
+  getWeather = weatherinfo => {
+    console.log(weatherinfo.main.temp);
+    this.setState({ temp: weatherinfo.main.temp });
+  };
   render() {
-    this.url =
-      "https://openweathermap.org/data/2.5/weather?q=" +
-      this.state.myName +
-      "&appid=b6907d289e10d714a6e88b30761fae22";
-
-    console.log(this.url);
-
     return (
       <div>
-        <Form handleData={this.handleParentData} />
-        <p>{this.state.myName}</p>
-        <Content content={this.state.content} />
+        <h2>Hello world, checkout today's weather!</h2>
+        <Form onSubmit={this.getWeather}></Form>
+        <h1>{this.state.temp}</h1>
       </div>
     );
   }
