@@ -3,6 +3,7 @@
   align-content: center;
   justify-content: center;
   max-width: 700px;
+  max-height: 100vh;
 }
 .news-container {
   padding: 2rem;
@@ -19,8 +20,9 @@
 .form-container {
   bottom: 0;
   position: fixed;
-  padding: 2rem;
+  padding: 0 3rem 3rem 3rem;
   width: 100%;
+  max-width: 700px;
   background-color: white;
   border-top: 1px solid #ecf0f1;
 }

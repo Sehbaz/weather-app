@@ -28,7 +28,7 @@ class Form extends Component {
     });
     // this will fetch the latest news in the tech industry
     const news = await Axios.get(
-      `https://newsapi.org/v2/top-headlines?q=tech&apiKey=7035a2ce18004b138c9f980fe58a0f21&pageSize=15`
+      `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7035a2ce18004b138c9f980fe58a0f21&pageSize=5`
     );
     this.setState({ tech: news.data.articles, newsTitle: "tech today" });
     // resetting to default values
