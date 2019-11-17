@@ -3,7 +3,7 @@ import "./Form.css";
 import Axios from "axios";
 class Form extends Component {
   // setting state to default value
-  state = { cityName: "", country: "", tech: [], temp: "" };
+  state = { cityName: "", country: "", tech: [], temp: "", newsTitle: "" };
 
   //handling the on click submit event
   handleSubmit = async event => {
@@ -15,9 +15,10 @@ class Form extends Component {
     this.setState({ temp: response.data.main.temp });
     // this will fetch the latest news in the tech industry
     const news = await Axios.get(
-      `https://newsapi.org/v2/top-headlines?q=tech&apiKey=7035a2ce18004b138c9f980fe58a0f21`
+      `https://newsapi.org/v2/top-headlines?q=tech&apiKey=7035a2ce18004b138c9f980fe58a0f21&pageSize=5`
     );
-    this.setState({ tech: news.data.articles });
+    this.setState({ tech: news.data.articles, newsTitle: "tech today" });
+
     // resetting to default values
     this.setState({ cityName: "", country: "" });
   };
@@ -29,26 +30,36 @@ class Form extends Component {
     });
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="city: London"
-            value={this.state.cityName}
-            onChange={event => this.setState({ cityName: event.target.value })}
-            required
-          ></input>
-          <input
-            type="text"
-            placeholder="country: UK"
-            value={this.state.country}
-            onChange={event => this.setState({ country: event.target.value })}
-            required
-          ></input>
-          <button>GO</button>
-        </form>
-        <h2>{this.state.temp}</h2>
-        <div>{news}</div>
+      <div className="main-container">
+        <div className="news-container">
+          <h1>{this.state.newsTitle}</h1>
+          <div>{news}</div>
+        </div>
+        <div className="temp-container">
+          <h2>{this.state.temp}</h2>
+        </div>
+        <div className="form-container">
+          {" "}
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              placeholder="city: London"
+              value={this.state.cityName}
+              onChange={event =>
+                this.setState({ cityName: event.target.value })
+              }
+              required
+            ></input>
+            <input
+              type="text"
+              placeholder="country: UK"
+              value={this.state.country}
+              onChange={event => this.setState({ country: event.target.value })}
+              required
+            ></input>
+            <button>GO</button>
+          </form>
+        </div>
       </div>
     );
   }
