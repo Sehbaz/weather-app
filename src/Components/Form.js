@@ -44,7 +44,7 @@ class Form extends Component {
       <div className="main-container">
         <div className="news-container">
           <h1>{this.state.newsTitle}</h1>
-          <div>
+          <div className="news-div">
             <ul>{news}</ul>
           </div>
         </div>
